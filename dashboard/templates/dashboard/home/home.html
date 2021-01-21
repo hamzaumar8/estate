@@ -1,0 +1,76 @@
+{% extends 'dashboard/layouts/base.html' %}
+
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+          <!-- Card stats -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid mt--7">
+
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">{{dash_title}}</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="{% url 'dashboard:add-home' %}" class="btn btn-primary">Add New Home</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush" id="basic-datatable">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Home Name</th>
+                    <th scope="col">House No.</th>
+                    <th scope="col">Owner's Name</th>
+                    <th scope="col">Owner's Email</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for home in homes %}
+                  <tr>
+                    <td>{{home.name}}</td>
+                    <td>{{home.house_no}}</td>
+                    <td>{{home.owner_name}}</td>
+                    <td>{{home.owner_email}}</td>
+                    <td>{{home.phone_number}}</td>
+                    <td class="text-right">
+                      <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

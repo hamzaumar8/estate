@@ -37,6 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
+    'crispy_forms',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'django_filters',
+
+    'dashboard',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +65,7 @@ ROOT_URLCONF = 'estate.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +129,61 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL='/media/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
+ACCOUNT_FORMS = {
+'signup': 'authentication.forms.CustomSignupForm',
+}
+
+
+SITE_ID = 1
+LOGIN_URL='/accounts/login/'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+ACCOUNT_AUTHENTICATION_METHOD =  "email" 
+LOGIN_REDIRECT_URL = "/"
+
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 3600
+SESSION_SAVE_EVERY_REQUEST = True     
+
+# itsdangerous config
+ITSDANGEROUS_KEY = b"8669d7874b60c1bc5a21a2e6497f5a3efa64796b5aedd2d5f19884be8012"
+ITSDANGEROUS_EXPIRE_PERIOD = 48 * 3600  # 48 hours
+    
+ # Crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'   
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'mail.onestepplabs.com'
+EMAIL_PORT = 587 #also tried with 465
+EMAIL_HOST_USER = 'server@onestepplabs.com'
+EMAIL_HOST_PASSWORD = 'P@ss467'
+EMAIL_FROM_ADDRESS = 'support@oag.gov.gh'
+
+
+
+
+
+
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    
