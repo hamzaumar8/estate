@@ -3,14 +3,7 @@
 
 {% block content %}
 
-    <!-- Header -->
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
-      <div class="container-fluid">
-        <div class="header-body">
-          <!-- Card stats -->
-        </div>
-      </div>
-    </div>
+   
 
     <div class="container-fluid mt--7">
 
@@ -38,7 +31,7 @@
                     <th scope="col">Owner's Name</th>
                     <th scope="col">Owner's Email</th>
                     <th scope="col">Phone Number</th>
-                    <th scope="col"></th>
+                    <th scope="col">actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -57,8 +50,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                           <a class="dropdown-item" href="#">View</a>
-                          <a class="dropdown-item" href="#">Edit</a>
-                          <a class="dropdown-item" href="#">Delete</a>
+                          <a class="dropdown-item" href="{% url 'dashboard:edit-home' id=home.id %}">Edit</a>
+                          <a class="dropdown-item" href="{% url 'dashboard:delete-home' id=home.id %}">Delete</a>
                         </div>
                       </div>
                     </td>

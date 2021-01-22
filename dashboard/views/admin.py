@@ -84,3 +84,76 @@ def AddHome(request, *args, **kwargs):
         "form": form,
     }
     return render(request, 'dashboard/home/add.html', context)
+
+
+
+
+
+
+
+# @login_required
+# @check_admin
+# def ViewEntity(request, *args, **kwargs):
+#     _id = kwargs["id"]
+#     entity = get_object_or_404(models.Entity, pk=kwargs["id"])
+    
+#     context = {
+#         "dash_title": 'View Entity',
+#         "entity": entity
+#     }
+#     return render(request, "dashboard/view-entity.html", context)
+
+
+# Delte Entity View
+@login_required
+@check_admin
+def DeleteHome(request, *args, **kwargs):
+    _id = kwargs["id"]
+    home = get_object_or_404(models.Home, pk=kwargs["id"])
+    tenant_qs = models.Tenant.objects.filter(home=home, email=home.owner_email)
+    if tenant_qs.exists():
+        tenant = tenant_qs[0]
+        if tenant.user is not None:
+            get_object_or_404(User, pk=tenant.user.id).delete()
+    home.delete()
+
+    messages.success(request, "Home deleted successfully")
+    return redirect(reverse("dashboard:homes"))
+
+
+# Edit Home View
+@login_required
+@check_admin
+def EditHome(request, *args, **kwargs):
+    home = get_object_or_404(models.Home, pk=kwargs["id"])
+    old_email = home.owner_email
+    form = forms.HomeForm(instance=home)
+    if request.method == 'POST':
+        form = forms.HomeForm(request.POST, instance=home)
+        if form.is_valid():
+            owner_email = form.cleaned_data['owner_email']
+            owner_name = form.cleaned_data['owner_name']
+            phone_number = form.cleaned_data['phone_number']
+
+            if old_email != owner_email:
+                signup_invite_email(request, owner_email)
+            instance = form.save()
+
+            models.Tenant.objects.filter(user=request.user).update(
+                home=instance,
+                email=owner_email,  
+                name=owner_name,  
+                phone_number=phone_number
+            )
+
+            messages.success(request, 'Home has been updated!')
+            return redirect('dashboard:homes')
+
+    context = {
+        'dash_title': 'Edit Home',
+        'form': form,
+        # 'entity': entity,
+    }
+    return render(request, 'dashboard/home/edit.html', context)
+
+

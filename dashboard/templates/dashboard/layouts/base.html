@@ -38,7 +38,16 @@
   <div class="main-content">
 
     {% include "dashboard/includes/navigation.html" %}
-
+    {% block header %}
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+          {% include "dashboard/includes/messages.html" %}
+        </div>
+      </div>
+    </div>
+    {% endblock header %}
     {% block content %}{% endblock content %}
 
   </div>

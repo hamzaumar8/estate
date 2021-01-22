@@ -25,7 +25,7 @@ SECRET_KEY = 'pm!2bx0$+efle2_v!ctond#*0*7mm&ge@vhg0z4&p87##arn7@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['onestepplabs.com', 'www.onestepplabs.com']
 
 
 # Application definition
