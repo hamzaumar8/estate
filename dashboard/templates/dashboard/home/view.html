@@ -1,0 +1,63 @@
+{% extends 'dashboard/layouts/base.html' %}
+
+
+{% block content %}
+
+   
+
+    <div class="container-fluid mt--7">
+
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">{{dash_title}}</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="{% url 'dashboard:add-home' %}" class="btn btn-primary">Add New Home</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <tbody>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{home.id}}</td>
+                  </tr>
+                    <td>Home Name</td>
+                    <td>{{home.name}}</td>
+                  </tr>
+                    <td>House No.</td>
+                    <td>{{home.house_no}}</td>
+                  </tr>
+                  <td>Owner's Name</td>
+                    <td>{{home.owner_name}}</td>
+                  </tr>
+                  <td>Owner's Email</td>
+                    <td>{{home.owner_email}}</td>
+                  </tr>
+                  <td>Phone Number</td>
+                    <td>{{home.phone_number}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="p-3 mb-3"> 
+                <div div="dt-buttons col-sm-12">
+                  <a class="btn btn-sm mx-1 btn-primary" href="{% url 'dashboard:edit-home' id=home.id %}">Edit</a>
+                  <a class="btn btn-sm mx-1 btn-danger" href="{% url 'dashboard:delete-home' id=home.id %}">Delete</a>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

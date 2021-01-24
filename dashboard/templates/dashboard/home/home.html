@@ -49,7 +49,7 @@
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">View</a>
+                          <a class="dropdown-item" href="{% url 'dashboard:view-home' id=home.id %}">View</a>
                           <a class="dropdown-item" href="{% url 'dashboard:edit-home' id=home.id %}">Edit</a>
                           <a class="dropdown-item" href="{% url 'dashboard:delete-home' id=home.id %}">Delete</a>
                         </div>

@@ -91,17 +91,17 @@ def AddHome(request, *args, **kwargs):
 
 
 
-# @login_required
-# @check_admin
-# def ViewEntity(request, *args, **kwargs):
-#     _id = kwargs["id"]
-#     entity = get_object_or_404(models.Entity, pk=kwargs["id"])
+@login_required
+@check_admin
+def ViewHome(request, *args, **kwargs):
+    _id = kwargs["id"]
+    home = get_object_or_404(models.Home, pk=kwargs["id"])
     
-#     context = {
-#         "dash_title": 'View Entity',
-#         "entity": entity
-#     }
-#     return render(request, "dashboard/view-entity.html", context)
+    context = {
+        "dash_title": 'View Home',
+        "home": home
+    }
+    return render(request, "dashboard/home/view.html", context)
 
 
 # Delte Entity View
